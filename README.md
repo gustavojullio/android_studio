@@ -16,7 +16,9 @@ Antes de começar, certifique-se de ter o **Android Studio** instalado em sua m�
 Para utilizar, execute o seguinte comando:
 
 1. Clone este repositório para sua máquina local:
-   ```bash
-   git clone https://github.com/gustavojullio/android_studio.git
+    ```bash
+     git clone https://github.com/gustavojullio/android_studio.git
+     ```
+   
 
 
