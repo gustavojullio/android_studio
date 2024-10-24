@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 double valorGasolina = Double.parseDouble(clearStringGasolina);
                 double valorAlcool = Double.parseDouble(clearStringAlcool);
 
-                if (valorAlcool / valorGasolina < 0.7){
+                if (valorAlcool / valorGasolina <= 0.7){
                     resultado.setText("Resultado: Abasteça com Álcool.");
                     img.setImageResource(R.drawable.alcool);
                 }else{

@@ -36,7 +36,7 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Preço da Gasolina, ex: 5,65"
-        android:inputType="text"
+        android:inputType="number"
         android:textAlignment="viewStart"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:layout_editor_absoluteX="22dp" />
@@ -48,7 +48,7 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Preço do Álcool, ex: 4,25"
-        android:inputType="text"
+        android:inputType="number"
         app:layout_constraintTop_toBottomOf="@+id/editTextText"
         tools:layout_editor_absoluteX="23dp" />
 
