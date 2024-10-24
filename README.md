@@ -17,6 +17,6 @@ Para utilizar, execute o seguinte comando:
 
 1. Clone este repositório para sua máquina local:
    ```bash
-   git clone https://github.com/seu-usuario/android-projects.git
+   git clone [https://github.com/seu-usuario/android-projects.git](https://github.com/gustavojullio/android_studio.git)
 
 
