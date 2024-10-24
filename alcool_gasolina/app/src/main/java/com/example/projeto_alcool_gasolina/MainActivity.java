@@ -21,6 +21,12 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EditText gasolina;
+    private EditText alcool;
+    private Button btn;
+    private TextView resultado;
+    private ImageView img;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,26 +37,28 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        this.btn = findViewById(R.id.button);
+        this.gasolina = findViewById(R.id.editTextText);
+        this.alcool = findViewById(R.id.editTextText2);
+        this.resultado = findViewById(R.id.textView2);
+        this.img = findViewById(R.id.imageView);
 
-        Button btn = findViewById(R.id.button);
-        EditText gasolina = findViewById(R.id.editTextText);
-        EditText alcool = findViewById(R.id.editTextText2);
-        TextView resultado = findViewById(R.id.textView2);
-
-        gasolina.addTextChangedListener(new MoneyTextWatcher(gasolina));
-        alcool.addTextChangedListener(new MoneyTextWatcher(alcool));
+        this.gasolina.addTextChangedListener(new MoneyTextWatcher(gasolina));
+        this.alcool.addTextChangedListener(new MoneyTextWatcher(alcool));
 
     }
     public void calc(View view){
-        EditText gasolina = findViewById(R.id.editTextText);
-        EditText alcool = findViewById(R.id.editTextText2);
-        TextView resultado = findViewById(R.id.textView2);
-        ImageView img = findViewById(R.id.imageView);
 
-        if (!gasolina.getText().toString().equals("") && !alcool.getText().toString().equals("")){
+        String clearStringGasolina = this.gasolina.getText().toString().replaceAll("[^\\d]", "");
+        String clearStringAlcool = this.alcool.getText().toString().replaceAll("[^\\d]", "");
+
+        if (clearStringGasolina.equals("000") || alcool.getText().toString().equals("R$0,00")){
+            Toast.makeText(this, "Preencha todos os campos. ", Toast.LENGTH_SHORT).show();
+        }
+        else if (!gasolina.getText().toString().equals("") && !alcool.getText().toString().equals("")){
             try {
-                String clearStringGasolina = gasolina.getText().toString().replaceAll("[^\\d]", "");
-                String clearStringAlcool = alcool.getText().toString().replaceAll("[^\\d]", "");
+                clearStringGasolina = gasolina.getText().toString().replaceAll("[^\\d]", "");
+                clearStringAlcool = alcool.getText().toString().replaceAll("[^\\d]", "");
 
                 double valorGasolina = Double.parseDouble(clearStringGasolina);
                 double valorAlcool = Double.parseDouble(clearStringAlcool);
