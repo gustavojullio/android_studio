@@ -1,9 +1,12 @@
-# Android Studio Projects
+# Android Studio Projetos
 
-## Projects
+## Projetos
 
-### 1. **Project Alcohol vs Gas**
+### 1. **Projeto Álcool x Gasolina**
 - **Descrição: Projeto que avalia e determina qual combustível é mais vantajoso, ajudando o usuário a decidir entre abastecer com álcool ou gasolina.**
+
+### 2. **Projeto IMC**
+- **Descrição: Projeto que avalia o Índice de Massa Corporal (IMC) dos usuários, e determina se seu peso está dentro de uma faixa saudável.**
 
 
 
