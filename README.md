@@ -8,6 +8,8 @@
 ### 2. **Projeto IMC**
 - **Descrição: Projeto que avalia o Índice de Massa Corporal (IMC) dos usuários, e determina se seu peso está dentro de uma faixa saudável.**
 
+### 3. **Projeto Delivery**
+- **Descrição: Projeto que simula um sistema de pedidos de delivery, permitindo que o usuário selecione itens, visualize o total da compra e finalize o pedido.**
 
 
 ## Pré-requisitos

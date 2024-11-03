@@ -1,13 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DELIVERY"
-        android:textSize="30sp"
-        android:textStyle="bold"/>
+    <RelativeLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/txtDelivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DELIVERY"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="20dp"/>
+
+        <ImageView
+            android:id="@+id/imgHamburguer"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/hamburguer"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/txtDelivery"/>
+
+        <EditText
+            android:id="@+id/edtNome"
+            android:layout_width="387dp"
+            android:layout_height="43dp"
+            android:layout_below="@id/imgHamburguer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/txtValorH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edtNome"
+            android:layout_centerHorizontal="true"
+            android:text="Valor: R$ 25,00"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"/>
+
+        <Button
+            android:id="@+id/btnRemover"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtValorH"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="3dp"
+            android:layout_toStartOf="@id/edtQtd"
+            android:text="-"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:onClick="remover"/>
+
+        <EditText
+            android:id="@+id/edtQtd"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtValorH"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnAdicionar"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtValorH"
+            android:layout_toEndOf="@id/edtQtd"
+            android:text="+"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:onClick="adicionar"/>
+
+        <Button
+            android:id="@+id/btnPedir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edtQtd"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="7dp"
+            android:text="Pedir"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="7dp"
+            android:onClick="finalizar"/>
+
+        <TextView
+            android:id="@+id/txtValorTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnPedir"
+            android:layout_centerHorizontal="true"
+            android:text="TextView"
+            android:textColor="#7A7A7A"
+            android:textSize="25sp"
+            android:layout_marginBottom="7dp"/>
+
+        <TextView
+            android:id="@+id/txtMsgFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtValorTotal"
+            android:layout_centerHorizontal="true"
+            android:textColor="#7A7A7A"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
