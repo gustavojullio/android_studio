@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">projeto_delivery</string>
+    <string name="pedir">Pedir</string>
+    <string name="plus">+</string>
+    <string name="less">-</string>
+    <string name="price">Valor: R$ 25,00</string>
+    <string name="nome">Nome</string>
+    <string name="delivery">DELIVERY</string>
 </resources>

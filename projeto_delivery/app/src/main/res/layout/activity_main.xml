@@ -23,7 +23,7 @@
             android:id="@+id/txtDelivery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DELIVERY"
+            android:text="@string/delivery"
             android:textSize="35sp"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
@@ -46,7 +46,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:ems="10"
-            android:hint="Nome"
+            android:hint="@string/nome"
             android:inputType="text" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/edtNome"
             android:layout_centerHorizontal="true"
-            android:text="Valor: R$ 25,00"
+            android:text="@string/price"
             android:textSize="30sp"
             android:textStyle="bold"
             android:paddingTop="7dp"
@@ -69,7 +69,7 @@
             android:layout_marginTop="0dp"
             android:layout_marginEnd="3dp"
             android:layout_toStartOf="@id/edtQtd"
-            android:text="-"
+            android:text="@string/less"
             android:textSize="25sp"
             android:textStyle="bold"
             android:onClick="remover"/>
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txtValorH"
             android:layout_toEndOf="@id/edtQtd"
-            android:text="+"
+            android:text="@string/plus"
             android:textSize="25sp"
             android:textStyle="bold"
             android:onClick="adicionar"/>
@@ -104,7 +104,7 @@
             android:layout_below="@id/edtQtd"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="7dp"
-            android:text="Pedir"
+            android:text="@string/pedir"
             android:textSize="25sp"
             android:textStyle="bold"
             android:layout_marginBottom="7dp"
@@ -116,7 +116,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/btnPedir"
             android:layout_centerHorizontal="true"
-            android:text="TextView"
             android:textColor="#7A7A7A"
             android:textSize="25sp"
             android:layout_marginBottom="7dp"/>
@@ -127,6 +126,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txtValorTotal"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
             android:textColor="#7A7A7A"
             android:textSize="25sp"
             android:textStyle="bold" />
