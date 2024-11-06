@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         this.txtMsgFinal = findViewById(R.id.txtMsgFinal);
 
         this.edtQtd.setText(qtd + "");
-        this.txtValorTotal.setText("Valor Total: R$ 0,00");
+        this.txtValorTotal.setText("");
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -66,7 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void atualizaValorTotal(){
         double total = PRECO_UNITARIO * qtd;
-        this.txtValorTotal.setText(String.format("Valor Total: R$ %.2f", total));
+        if(total > 0){
+            this.txtValorTotal.setText(String.format("Valor Total: R$ %.2f", total));
+        }else{
+            this.txtValorTotal.setText("");
+        }
+
     }
 
     public void finalizar(View view){
@@ -76,17 +81,14 @@ public class MainActivity extends AppCompatActivity {
                 this.txtMsgFinal.setText(String.format("Obrigado %s por comprar conosco! Você pediu %d item(ns).", nome, qtd));
             }else{
                 Toast.makeText(this, "Por favor, adicione ao menos 1 item ao pedido.", Toast.LENGTH_SHORT).show();
-                this.txtValorTotal.setText("Valor Total: R$ 0,00");
+                this.txtValorTotal.setText("");
                 this.txtMsgFinal.setText("");
             }
-
-
-
         }else{
             Toast.makeText(this, "É obrigatório se identificar.", Toast.LENGTH_SHORT).show();
             qtd = 0;
             this.edtQtd.setText(qtd + "");
-            this.txtValorTotal.setText("Valor Total: R$ 0,00");
+            this.txtValorTotal.setText("");
             this.txtMsgFinal.setText("");
 
         }
