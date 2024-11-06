@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 this.btnRemover.setEnabled(false);
                 this.btnAdicionar.setEnabled(false);
                 this.edtNome.setEnabled(false);
+                this.edtQtd.setEnabled(false);
 
             }else{
                 Toast.makeText(this, "Por favor, adicione ao menos 1 item ao pedido.", Toast.LENGTH_SHORT).show();
