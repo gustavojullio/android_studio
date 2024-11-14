@@ -1,11 +1,9 @@
 package com.example.projeto_calculadora;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -35,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         this.txtOperacao = findViewById(R.id.operacao);
         this.txtResultado = findViewById(R.id.resultado);
     }
+
     // Método para resetar a operação e o resultado, limpando os TextViews
     public void ac(View view) {
         operacao = "";
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         this.txtResultado.setText("0");
         this.txtOperacao.setText("");
     }
+
     // Método responsável por capturar o número digitado pelo usuário ao clicar no botão
     public void numero(View view) {
         // Obtém o texto do botão precionado que é o número correspondente e adiciona na operação.
@@ -49,18 +49,20 @@ public class MainActivity extends AppCompatActivity {
         operacao += button.getText().toString();
         this.txtOperacao.setText(operacao);
     }
+
     // Método responsável por adicionar ponto decimal no numero.
     public void ponto(View view) {
         // Se já houver um numero, acrescenta-se o ponto nesse número
         if (!operacao.isEmpty()) {
             operacao += ".";
             this.txtOperacao.setText(operacao);
-        // Caso não haja nenhum número, é adiconado o zero antes de adicionar o ponto.
+            // Caso não haja nenhum número, é adiconado o zero antes de adicionar o ponto.
         } else {
             operacao += "0.";
             this.txtOperacao.setText(operacao);
         }
     }
+
     // Método responável por adicionar um operador a operação(+,-,x,/)
     public void operador(View view) {
         Button button = (Button) view;
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     // Método responsável por iniciar os cálculos quando o botão "=" é precionado
     public void igual(View view) {
         // Tenta calcular o resultado da operação, chamando o método responsável por "quebrar" a String operação
@@ -95,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             this.txtResultado.setText("Erro");
         }
     }
+
     // Função responsável por realizar o cálculo com base na operação fornecida
     public String calcularResultado(String operacao) {
         if (!operacao.isEmpty()) {
@@ -126,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             return String.valueOf("Vazio");
         }
     }
+
     // Método responsável por calcular a porcentagem do número digitado.
     public void porcentagem(View view) {
         if (!operacao.isEmpty()) {
@@ -145,7 +150,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Insira um número para calcular porcentagem", Toast.LENGTH_SHORT).show();
         }
     }
-   // Calcula o resultado parcial quando há um operador presente
+
+    // Calcula o resultado parcial quando há um operador presente
     private void calcularResultadoParcial() {
         try {
             resultado = calcularResultado(operacao);
@@ -155,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
             this.txtResultado.setText("Erro");
         }
     }
+
     // Método responsável por inverter o sinal do número
     public void inverterSinal(View view) {
         if (!operacao.isEmpty()) {
