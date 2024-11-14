@@ -12,7 +12,7 @@
 - **Descrição: Projeto que simula um sistema de pedidos de delivery, permitindo que o usuário selecione itens, visualize o total da compra e finalize o pedido.**
 
 ### 4. **Projeto Calculadora**
-- **Descrição: Projeto de uma calculadora que realiza as operações matemáticas básicas como adição, subtração, multiplicação e divisão, além de outras funcionalidades**
+- **Descrição: Projeto de uma calculadora que realiza as operações matemáticas básicas como adição, subtração, multiplicação e divisão, além de outras funcionalidades.**
 
 ## Pré-requisitos
 
