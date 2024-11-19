@@ -6,10 +6,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 
 public class MainActivity extends AppCompatActivity {
     //TextViews responsáveis por exibir a operação e o resultado na tela
@@ -19,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     //Strings responsáveis por armazenar a operação que está sendo construída e o resultado.
     private String operacao = "";
     private String resultado = "";
-    private String operadorProvisorio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             // Adiciona o operador à operação
             operacao += " " + button.getText().toString() + " ";
             this.txtOperacao.setText(operacao);
-            operadorProvisorio = button.getText().toString();
         } else {
             // Aviso se o usuário tentar usar um operador sem um número
             Toast.makeText(this, "Insira um numero", Toast.LENGTH_SHORT).show();
@@ -92,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
             this.txtOperacao.setText(operacao);
             // Armazena o resultado na variável de operação para permitir mais operações com o resultado
             operacao = resultado;
-
         } catch (Exception e) {
             // Exibe "Erro" se algo der errado durante o cálculo
             this.txtResultado.setText("Erro");
