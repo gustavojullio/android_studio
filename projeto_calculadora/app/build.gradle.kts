@@ -42,17 +42,19 @@ dependencies {
     implementation(libs.constraintlayout)
 
     testImplementation(libs.junit)
-    testImplementation(libs.mockito.core)
+    //testImplementation(libs.mockito.core)
     androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.mockito.core)
+
 
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(libs.espresso.idling.resource)
+    androidTestImplementation("androidx.test.espresso:espresso-idling-resource:3.5.1") // Adicionando a versão corretamente
 
-    androidTestImplementation(libs.mockito.android)
+    //androidTestImplementation(libs.mockito.android)
 
     androidTestImplementation(libs.test.rules)
+
+
 
 
 
