@@ -8,6 +8,9 @@
       <SelectionState runConfigName="testOutputAfterCalculation()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="testInputAfterButtonPress()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
