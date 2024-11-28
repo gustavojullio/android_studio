@@ -133,6 +133,71 @@ public class MainActivityTest {
         onView(withId(R.id.operacao)).check(matches(withText("")));
     }
 
+    @Test
+    public void testeSubstituirOperador() {
+        // Simulação quando digitar múltiplos operadores e substituir pelo último
+        onView(withId(R.id.oito)).perform(click()); // Pressiona "8"
+        onView(withId(R.id.soma)).perform(click()); // Pressiona "+"
+        onView(withId(R.id.multiplicacao)).perform(click()); // Pressiona "x"
+        onView(withId(R.id.divisao)).perform(click()); // Pressiona "/"
+
+        // Verifica se o operador é substituído pelo último
+        onView(withId(R.id.operacao)).check(matches(withText("8 / ")));
+    }
+
+    @Test
+    public void testeNovaOperacaoComNumero() {
+        // Simulação ao realizar uma operação e iniciar outra com outro numero
+        onView(withId(R.id.oito)).perform(click()); // Pressiona "8"
+        onView(withId(R.id.soma)).perform(click()); // Pressiona "+"
+        onView(withId(R.id.tres)).perform(click()); // Pressiona "3"
+        onView(withId(R.id.igual)).perform(click()); // Pressiona "=" para calcular
+
+        // Digitar novo número
+        onView(withId(R.id.cinco)).perform(click()); // Pressiona "5"
+
+        // Verifica se a nova operação começa com o número
+        onView(withId(R.id.operacao)).check(matches(withText("5")));
+    }
+
+    @Test
+    public void testeNaoPermitirMultiplosPontosNoPrimeiroNumero() {
+        // Simulação ao digitar um número com múltiplos pontos na primeira parte da operação
+        onView(withId(R.id.cinco)).perform(click()); // Pressiona "5"
+        onView(withId(R.id.ponto)).perform(click()); // Pressiona "."
+        onView(withId(R.id.ponto)).perform(click()); // Tenta pressionar outro "."
+
+        // Verifica se não há múltiplos pontos
+        // Poderia verificar a mensagem do Toast também, mas não sei como fazer
+        onView(withId(R.id.operacao)).check(matches(withText("5.")));
+    }
+
+    @Test
+    public void testeNaoPermitirMultiplosPontosNoSegundoNumero() {
+        // Simulação ao digitar um número com múltiplos pontos na segunda parte da operação
+        onView(withId(R.id.cinco)).perform(click()); // Pressiona "5"
+        onView(withId(R.id.soma)).perform(click()); // Pressiona "+"
+        onView(withId(R.id.tres)).perform(click()); // Pressiona "3"
+        onView(withId(R.id.ponto)).perform(click()); // Pressiona "."
+        onView(withId(R.id.ponto)).perform(click()); // Tenta pressionar outro "."
+
+        // Verifica se não há múltiplos pontos no segundo número
+        // Poderia vericar a mensagem do Toast também, mas não sei como fazer
+        onView(withId(R.id.operacao)).check(matches(withText("5 + 3.")));
+    }
+
+    @Test
+    public void testeNaoPermitirMultiplosPontosSemNumero() {
+        // Simulação ao digitar múltiplos pontos sem número
+        onView(withId(R.id.ponto)).perform(click()); // Pressiona "."
+        onView(withId(R.id.ponto)).perform(click()); // Tenta pressionar outro "."
+
+        // Verifica se o valor inicial é "0." e não permite outro ponto
+        // Poderia vericar a mensagem do Toast também, mas não sei como fazer
+        onView(withId(R.id.operacao)).check(matches(withText("0.")));
+    }
+
+
 
 
 

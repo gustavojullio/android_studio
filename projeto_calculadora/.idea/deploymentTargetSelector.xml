@@ -5,22 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="MainActivityTest">
+      <SelectionState runConfigName="testeSubstituirOperador()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testSaidaDivisao()">
+      <SelectionState runConfigName="testeNovaOperacaoComNumero()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testSaidaDivisaoPorZero()">
+      <SelectionState runConfigName="testeNaoPermitirMultiplosPontosNoPrimeiroNumero()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testePorcentagem()">
+      <SelectionState runConfigName="testeNaoPermitirMultiplosPontosNoSegundoNumero()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testeInverterSinal()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="testeAc()">
+      <SelectionState runConfigName="testeNaoPermitirMultiplosPontosSemNumero()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

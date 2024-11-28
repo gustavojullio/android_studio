@@ -41,18 +41,50 @@ public class MainActivity extends AppCompatActivity {
     public void numero(View view) {
         // Obtém o texto do botão precionado que é o número correspondente e adiciona na operação.
         Button button = (Button) view;
+
+        // Verifica se o último cálculo foi exibido e não há operador na operação
+        if (!resultado.isEmpty() && !operacao.contains(" ")) {
+            // Reinicia a operação ao digitar um novo número, iniciando uma nova expressão
+            operacao = "";
+        }
+
         operacao += button.getText().toString();
         this.txtOperacao.setText(operacao);
+
+        // Limpa o resultado (para evitar conflitos em novas operações)
+        resultado = "";
     }
+
+
+
 
     // Método responsável por adicionar ponto decimal no numero.
     public void ponto(View view) {
         // Se já houver um numero, acrescenta-se o ponto nesse número
         if (!operacao.isEmpty()) {
-            operacao += ".";
-            this.txtOperacao.setText(operacao);
-            // Caso não haja nenhum número, é adiconado o zero antes de adicionar o ponto.
+            // Divide a operação em partes para verificar o número atual
+            String[] partes = operacao.split(" ");
+
+            // Caso não tenha operador, verifica o número antes de adicionar o ponto
+            if (!operacao.contains(" ")) {
+                if (!operacao.contains(".")) {
+                    operacao += ".";
+                    this.txtOperacao.setText(operacao);
+                } else {
+                    Toast.makeText(this, "Número já contém ponto decimal", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                // Se há operador, verifica o último número
+                String ultimoNumero = partes[partes.length - 1];
+                if (!ultimoNumero.contains(".")) {
+                    operacao += ".";
+                    this.txtOperacao.setText(operacao);
+                } else {
+                    Toast.makeText(this, "Número já contém ponto decimal", Toast.LENGTH_SHORT).show();
+                }
+            }
         } else {
+            // Caso não haja número, inicia com "0."
             operacao += "0.";
             this.txtOperacao.setText(operacao);
         }
@@ -64,11 +96,20 @@ public class MainActivity extends AppCompatActivity {
         if (!operacao.isEmpty()) {
             // Se já houver um operador na operação, realiza o cálculo parcial antes de adicionar um novo operador
             if (operacao.contains(" ")) {
-                // Se a operação já contiver um operador, calcula o resultado
-                calcularResultadoParcial();
+                // Divide a operação em partes
+                String[] partes = operacao.split(" ");
+                if (partes.length == 2) {
+                    // Substitui o operador atual pelo novo
+                    operacao = partes[0] + " " + button.getText().toString() + " ";
+                } else if (partes.length == 3) {
+                    // Calcula parcialmente
+                    calcularResultadoParcial();
+                    operacao += " " + button.getText().toString() + " ";
+                }
+            }else{
+                // Caso ainda não tenha operador, adiciona o operador normalmente
+                operacao += " " + button.getText().toString() + " ";
             }
-            // Adiciona o operador à operação
-            operacao += " " + button.getText().toString() + " ";
             this.txtOperacao.setText(operacao);
         } else {
             // Aviso se o usuário tentar usar um operador sem um número
