@@ -131,6 +131,7 @@ public class MainActivityTest {
 
         // Verifica se a saída do TextView foi igual a ""
         onView(withId(R.id.operacao)).check(matches(withText("")));
+        onView(withId(R.id.resultado)).check(matches(withText("0")));
     }
 
     @Test
@@ -153,11 +154,16 @@ public class MainActivityTest {
         onView(withId(R.id.tres)).perform(click()); // Pressiona "3"
         onView(withId(R.id.igual)).perform(click()); // Pressiona "=" para calcular
 
+        // Verifica o resultado apos os cliques nos botoes
+        onView(withId(R.id.resultado)).check(matches(withText("11.0")));
+        onView(withId(R.id.operacao)).check(matches(withText("8 + 3")));
+
         // Digitar novo número
         onView(withId(R.id.cinco)).perform(click()); // Pressiona "5"
 
         // Verifica se a nova operação começa com o número
         onView(withId(R.id.operacao)).check(matches(withText("5")));
+
     }
 
     @Test
