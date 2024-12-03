@@ -40,4 +40,9 @@ public class RocketModel {
     public String getPayload(){
         return payload;
     }
+
+    @Override
+    public String toString() {
+        return "rocketModel"
+    }
 }
