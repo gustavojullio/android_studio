@@ -43,6 +43,12 @@ public class RocketModel {
 
     @Override
     public String toString() {
-        return "rocketModel"
+        return "RocketModel{" +
+                "rocketName='" + rocketName + '\'' +
+                ", launchDate='" + launchDate + '\'' +
+                ", launchSuccess=" + launchSuccess +
+                ", payload='" + payload + '\'' +
+                '}';
     }
+
 }
