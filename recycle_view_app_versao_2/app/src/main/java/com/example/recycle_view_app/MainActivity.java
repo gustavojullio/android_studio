@@ -1,4 +1,5 @@
 package com.example.recycle_view_app;
+
 import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         rocketModels.add(rocketModel_10);
 
         RecyclerView.Adapter<RocketAdapter.ViewHolder> adapter = new RocketAdapter(rocketModels);
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(layoutManager);

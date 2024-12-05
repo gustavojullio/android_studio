@@ -1,4 +1,5 @@
 package com.example.recycle_view_app;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 public class RocketAdapter extends RecyclerView.Adapter<RocketAdapter.ViewHolder> {
 
     ArrayList<RocketModel> rocketModels;
-
     public RocketAdapter(ArrayList<RocketModel> rocketModels){
         this.rocketModels = rocketModels;
     }
@@ -32,6 +32,7 @@ public class RocketAdapter extends RecyclerView.Adapter<RocketAdapter.ViewHolder
             img_rocket = itemView.findViewById(R.id.img_rocket);
         }
     }
+
     //Cria uma nova instância de ViewHolder para cada item da lista.
     @NonNull
     @Override
