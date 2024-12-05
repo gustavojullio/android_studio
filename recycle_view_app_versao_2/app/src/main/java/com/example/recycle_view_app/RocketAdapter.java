@@ -1,16 +1,11 @@
 package com.example.recycle_view_app;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class RocketAdapter extends RecyclerView.Adapter<RocketAdapter.ViewHolder> {
@@ -30,15 +25,14 @@ public class RocketAdapter extends RecyclerView.Adapter<RocketAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             rocket_name = itemView.findViewById(R.id.rocket_name);
             launch_date = itemView.findViewById(R.id.launch_date);
             launch_success = itemView.findViewById(R.id.launch_success);
             payload = itemView.findViewById(R.id.payload);
             img_rocket = itemView.findViewById(R.id.img_rocket);
-
         }
     }
+    //Cria uma nova instância de ViewHolder para cada item da lista.
     @NonNull
     @Override
     public RocketAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,6 +40,7 @@ public class RocketAdapter extends RecyclerView.Adapter<RocketAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
+    // Exibe cada item da lista
     @Override
     public void onBindViewHolder(@NonNull RocketAdapter.ViewHolder holder, int position) {
         RocketModel rocketModel = rocketModels.get(position);
@@ -62,6 +57,7 @@ public class RocketAdapter extends RecyclerView.Adapter<RocketAdapter.ViewHolder
         holder.img_rocket.setImageResource(rocketModel.getImageResource());
     }
 
+    // Retorna o número total de itens
     @Override
     public int getItemCount() {
         return rocketModels.size();

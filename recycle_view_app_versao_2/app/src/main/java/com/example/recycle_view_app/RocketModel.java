@@ -7,6 +7,7 @@ public class RocketModel {
     String payload;
     int imgResource;
 
+    // Construtor responsável pela criação de cada componente do RecyclerView.
     public RocketModel(String rocketName, String launchDate, boolean launchSuccess, String payload, int imgResource){
         this.rocketName = rocketName;
         this.launchDate = launchDate;
@@ -47,6 +48,7 @@ public class RocketModel {
         return imgResource;
     }
 
+    // Conversão do objeto para String
     @Override
     public String toString() {
         return "RocketModel{" +

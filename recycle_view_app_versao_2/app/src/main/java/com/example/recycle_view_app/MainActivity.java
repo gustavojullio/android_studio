@@ -1,21 +1,13 @@
 package com.example.recycle_view_app;
-
 import android.os.Bundle;
-import android.view.View;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +15,10 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        // Inicialização do RecyclerView
         this.recyclerView = findViewById(R.id.recyclerview);
 
+        // Instanciação dos objetos para o RecyclerView
         RocketModel rocketModel_1 = new RocketModel("falcon 1", "06/11/2024", true, "satelite", R.drawable.img1);
         RocketModel rocketModel_2 = new RocketModel("atlas v", "12/12/2024", true, "exploração", R.drawable.img2);
         RocketModel rocketModel_3 = new RocketModel("delta iv", "15/01/2025", false, "observação", R.drawable.img1);
@@ -37,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         RocketModel rocketModel_10 = new RocketModel("soyuz", "18/08/2025", true, "missão tripulada", R.drawable.img2);
 
         ArrayList<RocketModel> rocketModels = new ArrayList<>();
+        // Inclusão dos objetos instanciados no ArrayList
         rocketModels.add(rocketModel_1);
         rocketModels.add(rocketModel_2);
         rocketModels.add(rocketModel_3);
@@ -55,12 +50,5 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
     }
 }
