@@ -18,6 +18,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Button btnSolicitar;
+    Button btnAdicionar;
+    Button btnRemover;
+    private static int qtd = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +72,21 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    // método para solicitar a pizzar
+    // método para solicitar a pizza
 
     public void solicitar(View view){
+        Button button = (Button) view;
+        button.setBackgroundColor(0xFF28A745);
+
+    }
+
+    public void remover(View view){
+        Button button = (Button) view;
+        button.setBackgroundColor(0xFF28A745);
+
+    }
+
+    public void adicionar(View view){
         Button button = (Button) view;
         button.setBackgroundColor(0xFF28A745);
 
