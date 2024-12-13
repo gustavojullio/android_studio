@@ -12,4 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"/>
+
+    <Button
+        android:id="@+id/btnSolicitar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#007bff"
+        android:layout_below="@+id/recyclerview"
+        android:text="Solicitar"
+        android:onClick="solicitar" />
 </RelativeLayout>

@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,8 +23,12 @@ public class PizzaAdapter  extends RecyclerView.Adapter<PizzaAdapter.ViewHolder>
         TextView txtNome_pizza;
         TextView txtIngredientes;
         TextView txtValor;
-        Button btnSolicitar;
         ImageView ImgView_pizza;
+        EditText edtQtd;
+        Button btnAdicionar;
+        Button btnRemover;
+
+
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -31,8 +36,10 @@ public class PizzaAdapter  extends RecyclerView.Adapter<PizzaAdapter.ViewHolder>
             txtNome_pizza = itemView.findViewById(R.id.txtNome_pizza);
             txtIngredientes = itemView.findViewById(R.id.txtIngredientes);
             txtValor = itemView.findViewById(R.id.txtValor);
-            btnSolicitar = itemView.findViewById(R.id.btnSolicitar);
             ImgView_pizza = itemView.findViewById(R.id.ImgView_pizza);
+            btnAdicionar = itemView.findViewById(R.id.btnAdicionar);
+            btnRemover = itemView.findViewById(R.id.btnRemover);
+            edtQtd = itemView.findViewById(R.id.edtQtd);
         }
     }
     //Cria uma nova instância de ViewHolder para cada item da lista.
@@ -50,8 +57,22 @@ public class PizzaAdapter  extends RecyclerView.Adapter<PizzaAdapter.ViewHolder>
         holder.txtNome_pizza.setText("Nome: " + pizzaModel.getNomePizza());
         holder.txtIngredientes.setText("Ingredientes: " + pizzaModel.getIngredientesPizza());
         holder.txtValor.setText("Valor: R$" + pizzaModel.getValorPizza());
-        holder.btnSolicitar.setText("Solicitar");
         holder.ImgView_pizza.setImageResource(pizzaModel.getImgPizzaResource());
+        holder.edtQtd.setText(String.valueOf(pizzaModel.getQuantidade()));
+
+        // Listener para adicionar
+        holder.btnAdicionar.setOnClickListener(v -> {
+            int novaQuantidade = pizzaModel.getQuantidade() + 1;
+            pizzaModel.setQuantidade(novaQuantidade);
+            holder.edtQtd.setText(String.valueOf(novaQuantidade));
+        });
+
+        // Listener para remover
+        holder.btnRemover.setOnClickListener(v -> {
+            int novaQuantidade = Math.max(pizzaModel.getQuantidade() - 1, 0);
+            pizzaModel.setQuantidade(novaQuantidade);
+            holder.edtQtd.setText(String.valueOf(novaQuantidade));
+        });
     }
 
     @Override

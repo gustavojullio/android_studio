@@ -90,14 +90,4 @@
         </RelativeLayout>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnSolicitar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#007bff"
-        android:text="Solicitar"
-        android:onClick="solicitar"/>
-
 </LinearLayout>

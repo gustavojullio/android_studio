@@ -6,16 +6,15 @@ public class PizzaModel {
     String nomePizza;
     String ingredientesPizza;
     double valorPizza;
-    Button btnSolicitar;
     int imgPizzaResource;
+    int quantidade = 0;
 
 
     // Construtor responsável pela criação de cada componente do RecyclerView.
-    public PizzaModel(String nomePizza, String ingredientesPizza, double valorPizza, Button btnSolicitar, int imgPizzaResource){
+    public PizzaModel(String nomePizza, String ingredientesPizza, double valorPizza, int imgPizzaResource){
         this.nomePizza = nomePizza;
         this.ingredientesPizza = ingredientesPizza;
         this.valorPizza = valorPizza;
-        this.btnSolicitar = btnSolicitar;
         this.imgPizzaResource = imgPizzaResource;
     }
 
@@ -43,9 +42,6 @@ public class PizzaModel {
         this.valorPizza = valorPizza;
     }
 
-    public void setBtnSolicitar(Button btnSolicitar) {
-        this.btnSolicitar = btnSolicitar;
-    }
 
     public int getImgPizzaResource(){
         return  imgPizzaResource;
@@ -54,6 +50,15 @@ public class PizzaModel {
     public void setImgPizzaResource(int imgPizzaResource) {
         this.imgPizzaResource = imgPizzaResource;
     }
+
+    public int getQuantidade(){
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
     public String toString() {
         return "PizzaModel{" +
                 "nomePizza='" + nomePizza + '\'' +
