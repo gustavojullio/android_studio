@@ -1,10 +1,13 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +21,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    Button btnSolicitar;
-    Button btnAdicionar;
-    Button btnRemover;
     private static int qtd = 0;
+    ArrayList<PizzaModel> pizzaModels = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         PizzaModel pizza13 = new PizzaModel("Pesto", "Molho pesto, mussarela de búfala, tomate", 57.00, R.drawable.pizza_pesto);
         PizzaModel pizza14 = new PizzaModel("Rúcula com Parmesão", "Rúcula fresca, queijo parmesão, tomate seco", 59.00, R.drawable.pizza_rucula_parmesao);
 
-        ArrayList<PizzaModel> pizzaModels = new ArrayList<>();
         // Inclusão dos objetos instanciados no ArrayList
         pizzaModels.add(pizza1);
         pizzaModels.add(pizza2);
@@ -71,6 +72,58 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    /*public void solicitar(View view) {
+        int totalQuantidade = 0;
+        for (PizzaModel pizza : pizzaModels) {
+            totalQuantidade += pizza.getQuantidade();
+        }
+        Toast.makeText(this, "Total de pizzas solicitadas: " + totalQuantidade, Toast.LENGTH_LONG).show();
+    }*/
+
+    public void solicitar(View view) {
+        int totalQuantidade = 0;
+        double totalValor = 0.0;
+        StringBuilder resumoPedido = new StringBuilder();
+
+        // percorre a lista de pizzas e soma as quantidades e valores
+        for (PizzaModel pizza : pizzaModels) {
+            if (pizza.getQuantidade() > 0) { // somente exibir pizzas com quantidade maior que 0
+                totalQuantidade += pizza.getQuantidade();
+                double valorPizza = pizza.getQuantidade() * pizza.getValorPizza();
+                totalValor += valorPizza;
+
+                // adiciona detalhes da pizza no resumo
+                resumoPedido.append("Pizza: ").append(pizza.getNomePizza())
+                        .append("\nQuantidade: ").append(pizza.getQuantidade())
+                        .append("\nSubtotal: R$ ").append(String.format("%.2f", valorPizza))
+                        .append("\n\n");
+            }
+        }
+
+        // verifica se alguma pizza foi selecionada
+        if (totalQuantidade == 0) {
+            resumoPedido.append("Nenhuma pizza foi selecionada.");
+        } else {
+            resumoPedido.append("-------------------------\n");
+            resumoPedido.append("Total de Pizzas: ").append(totalQuantidade).append("\n");
+            resumoPedido.append("Valor Total: R$ ").append(String.format("%.2f", totalValor)).append("\n\n");
+            resumoPedido.append("Obrigado pela preferência!");
+        }
+
+        // exibe o AlertDialog com os detalhes do pedido
+        new AlertDialog.Builder(this)
+                .setTitle("Resumo do Pedido")
+                .setMessage(resumoPedido.toString())
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss(); // fecha o dialog
+                    }
+                })
+                .setCancelable(false) // evita que o usuário feche clicando fora do dialog
+                .show();
     }
 
 }

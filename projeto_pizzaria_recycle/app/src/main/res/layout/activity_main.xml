@@ -17,9 +17,10 @@
         android:id="@+id/btnSolicitar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#007bff"
-        android:layout_below="@+id/recyclerview"
         android:text="Solicitar"
         android:onClick="solicitar" />
 </RelativeLayout>
