@@ -4,16 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +13,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    private static int qtd = 0;
     ArrayList<PizzaModel> pizzaModels = new ArrayList<>();
 
     @Override
@@ -35,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Instanciação dos objetos para o RecyclerView
-
         PizzaModel pizza1 = new PizzaModel("Margherita", "Mussarela, tomate, manjericão", 45.00, R.drawable.pizza_margherita);
         PizzaModel pizza2 = new PizzaModel("Calabresa", "Calabresa, cebola, azeitona", 50.00, R.drawable.pizza_calabresa);
         PizzaModel pizza3 = new PizzaModel("Quatro Queijos", "Mussarela, gorgonzola, parmesão, provolone", 55.00, R.drawable.pizza_quatro_queijos);
@@ -74,14 +64,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    /*public void solicitar(View view) {
-        int totalQuantidade = 0;
-        for (PizzaModel pizza : pizzaModels) {
-            totalQuantidade += pizza.getQuantidade();
-        }
-        Toast.makeText(this, "Total de pizzas solicitadas: " + totalQuantidade, Toast.LENGTH_LONG).show();
-    }*/
-
+    /*
+    *
+    * */
     public void solicitar(View view) {
         int totalQuantidade = 0;
         double totalValor = 0.0;
@@ -105,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
         // verifica se alguma pizza foi selecionada
         if (totalQuantidade == 0) {
             resumoPedido.append("Nenhuma pizza foi selecionada.");
-        } else {
+        }
+        else {
             resumoPedido.append("-------------------------\n");
             resumoPedido.append("Total de Pizzas: ").append(totalQuantidade).append("\n");
             resumoPedido.append("Valor Total: R$ ").append(String.format("%.2f", totalValor)).append("\n\n");
@@ -116,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Resumo do Pedido")
                 .setMessage(resumoPedido.toString())
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss(); // fecha o dialog

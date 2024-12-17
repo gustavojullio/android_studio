@@ -19,6 +19,7 @@ public class PizzaAdapter  extends RecyclerView.Adapter<PizzaAdapter.ViewHolder>
     public PizzaAdapter(ArrayList<PizzaModel> pizzaModels){
         this.pizzaModels = pizzaModels;
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView txtNome_pizza;
         TextView txtIngredientes;
@@ -27,9 +28,6 @@ public class PizzaAdapter  extends RecyclerView.Adapter<PizzaAdapter.ViewHolder>
         EditText edtQtd;
         Button btnAdicionar;
         Button btnRemover;
-
-
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -42,6 +40,7 @@ public class PizzaAdapter  extends RecyclerView.Adapter<PizzaAdapter.ViewHolder>
             edtQtd = itemView.findViewById(R.id.edtQtd);
         }
     }
+
     //Cria uma nova instância de ViewHolder para cada item da lista.
     @NonNull
     @Override

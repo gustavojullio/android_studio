@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import android.widget.Button;
-
 public class PizzaModel {
     String nomePizza;
     String ingredientesPizza;
