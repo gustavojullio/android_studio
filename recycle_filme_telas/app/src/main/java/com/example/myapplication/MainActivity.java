@@ -5,9 +5,6 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         List<Movie> movieList = new ArrayList<>();
         movieList.add(new Movie("Interestelar", R.drawable.filme1, "2014-11-07", 8.6, "Em um futuro distópico, um grupo de exploradores viaja pelo espaço em busca de um novo lar para a humanidade."));
         movieList.add(new Movie("O Poderoso Chefão", R.drawable.filme2, "1972-03-24", 9.2, "A história da família mafiosa Corleone, liderada por Don Vito Corleone, e os conflitos internos e externos que enfrentam."));
-        movieList.add(new Movie("Pulp Fiction: Tempo de Violência", R.drawable.filme3, "1994-10-14", 8.9, "Várias histórias interligadas sobre criminosos, violência e redenção, em uma das obras mais aclamadas de Quentin Tarantino."));
         movieList.add(new Movie("Um Sonho de Liberdade", R.drawable.filme4, "1994-09-22", 9.3, "Um homem condenado injustamente por assassinato forma uma amizade improvável com um prisioneiro enquanto busca a liberdade."));
         movieList.add(new Movie("Os Vingadores", R.drawable.filme5, "2012-05-04", 8.0, "Os maiores heróis da Terra se unem para impedir uma ameaça global, com Loki tentando dominar a Terra usando um exército alienígena."));
         movieList.add(new Movie("A Origem", R.drawable.filme6, "2020-07-16", 8.8, "Um ladrão especializado em roubar segredos através dos sonhos recebe uma última missão para implantar uma ideia na mente de um alvo."));
@@ -40,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         movieList.add(new Movie("Guardiões da Galáxia", R.drawable.filme12, "2014-08-01", 8.0, "Peter Quill forma uma equipe de desajustados para roubar um artefato, mas acabam lutando para salvar a galáxia."));
         movieList.add(new Movie("O Rei Leão", R.drawable.filme13, "1994-06-15", 8.5, "Simba, um leão jovem, deve confrontar seu tio Scar e assumir seu lugar como rei de uma terra ameaçada."));
         movieList.add(new Movie("Homem-Aranha: Sem Volta Para Casa", R.drawable.filme14, "2021-12-17", 8.3, "Peter Parker enfrenta as consequências de sua identidade secreta sendo revelada e busca ajuda de Doutor Estranho para reverter o caos que causou."));
-        movieList.add(new Movie("Frozen: Uma Aventura Congelante", R.drawable.filme14, "2013-11-27", 7.4, "A história das irmãs Elsa e Anna, com Elsa tentando controlar seus poderes de gelo enquanto busca se reconectar com sua irmã perdida."));
+        movieList.add(new Movie("Frozen: Uma Aventura Congelante", R.drawable.filme15, "2013-11-27", 7.4, "A história das irmãs Elsa e Anna, com Elsa tentando controlar seus poderes de gelo enquanto busca se reconectar com sua irmã perdida."));
 
         MovieAdapter movieAdapter = new MovieAdapter(this, movieList);
         recyclerView.setAdapter(movieAdapter);
@@ -49,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Movie movie) {
                 Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
-                intent.putExtra("movieTitle")
+                intent.putExtra("movieTitle", movie.getTitle());
+                intent.putExtra("moviePosterImage", movie.getPosterImage());
+                startActivity(intent);
             }
         });
-
     }
 }

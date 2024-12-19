@@ -13,7 +13,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     ImageView posterImageView;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
