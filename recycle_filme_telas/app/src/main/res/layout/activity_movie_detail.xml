@@ -23,4 +23,21 @@
         android:layout_marginTop="16dp"
         android:scaleType="fitCenter"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descrição:"
+        android:textSize="18sp"
+        android:ellipsize="end"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/overView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+
 </LinearLayout>

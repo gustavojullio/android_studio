@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MovieDetailActivity extends AppCompatActivity {
     TextView titleTextView;
+    TextView overViewText;
     ImageView posterImageView;
 
     @Override
@@ -19,14 +20,19 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         titleTextView = findViewById(R.id.movieDetailTitle);
         posterImageView = findViewById(R.id.movieDetailPoster);
+        overViewText = findViewById(R.id.overView);
+
+
 
         Intent intent = getIntent();
         String movieTitle = intent.getStringExtra("movieTitle");
+        String overView = intent.getStringExtra("overView");
         int movieImage = intent.getIntExtra("moviePosterImage", -1);
 
         if(movieTitle != null && movieImage != -1){
             titleTextView.setText(movieTitle);
             posterImageView.setImageResource(movieImage);
+            overViewText.setText(overView);
         }
 
     }

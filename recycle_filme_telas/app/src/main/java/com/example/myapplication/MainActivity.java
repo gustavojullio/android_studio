@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
                 intent.putExtra("movieTitle", movie.getTitle());
                 intent.putExtra("moviePosterImage", movie.getPosterImage());
+                intent.putExtra("overView", movie.getOverview());
                 startActivity(intent);
             }
         });
