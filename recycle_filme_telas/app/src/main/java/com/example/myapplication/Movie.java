@@ -7,7 +7,6 @@ public class Movie {
     int posterImage;
     String releaseDate;
 
-
     public Movie(String title, int posterImage, String releaseDate, double rating, String overview){
        this.title = title;
        this.posterImage = posterImage;
@@ -55,6 +54,4 @@ public class Movie {
     public void setOverview(String overview) {
         this.overview = overview;
     }
-
-
 }

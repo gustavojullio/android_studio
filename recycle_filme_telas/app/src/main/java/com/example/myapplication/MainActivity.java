@@ -2,12 +2,10 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +16,11 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        // Inicialização do RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // Instanciação e inserção dos objetos para o RecyclerView
         List<Movie> movieList = new ArrayList<>();
         movieList.add(new Movie("Interestelar", R.drawable.filme1, "2014-11-07", 8.6, "Em um futuro distópico, um grupo de exploradores viaja pelo espaço em busca de um novo lar para a humanidade."));
         movieList.add(new Movie("O Poderoso Chefão", R.drawable.filme2, "1972-03-24", 9.2, "A história da família mafiosa Corleone, liderada por Don Vito Corleone, e os conflitos internos e externos que enfrentam."));
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         MovieAdapter movieAdapter = new MovieAdapter(this, movieList);
         recyclerView.setAdapter(movieAdapter);
 
+        // Método que exibe as informações do filme selecionado em uma nova tela
         movieAdapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Movie movie) {
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("movieTitle", movie.getTitle());
                 intent.putExtra("moviePosterImage", movie.getPosterImage());
                 intent.putExtra("overView", movie.getOverview());
+                intent.putExtra("rating", movie.getRating());
                 startActivity(intent);
             }
         });
