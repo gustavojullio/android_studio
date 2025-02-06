@@ -43,13 +43,15 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Login" />
+            android:text="Login"
+            android:onClick="logar"/>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txtCadastrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Você ainda não tem uma conta? Clique aqui para se cadastrar!"/>
+            android:text="Você ainda não tem uma conta? Clique aqui para se cadastrar!"
+            android:onClick="cadastrar"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
