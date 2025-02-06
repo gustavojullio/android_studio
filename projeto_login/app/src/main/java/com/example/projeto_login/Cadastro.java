@@ -1,4 +1,5 @@
 package com.example.projeto_login;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,10 +10,13 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Cadastro extends AppCompatActivity {
+
     EditText edtUsuario;
     EditText edtSenha;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.cadastro);
@@ -23,9 +27,12 @@ public class Cadastro extends AppCompatActivity {
     }
     // Método responsável por criar o cadastro do usuário
     public void cadastrar(View view){
+
         // Verifica se as informações foram digitadas para realizar o cadastro
         if (!edtUsuario.getText().toString().isEmpty()){
+
             if (!edtSenha.getText().toString().isEmpty()){
+
                 String nomeUsuario = edtUsuario.getText().toString();
                 String senhaUsuario = edtSenha.getText().toString();
 
@@ -35,8 +42,9 @@ public class Cadastro extends AppCompatActivity {
 
                 editor.putString("nomeUsuario", nomeUsuario);
                 editor.putString("senhaUsuario", senhaUsuario);
-
                 editor.apply();
+
+                Toast.makeText(this, "Usuario Cadastrado Com Sucesso.", Toast.LENGTH_SHORT).show();
 
                 // Retorna a view de login
                 Intent intent = new Intent(Cadastro.this, MainActivity.class);

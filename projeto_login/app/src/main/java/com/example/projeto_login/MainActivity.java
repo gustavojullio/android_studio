@@ -9,8 +9,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 public class MainActivity extends AppCompatActivity {
+
     EditText edtUsuario, edtSenha;
 
     @Override
@@ -25,10 +25,12 @@ public class MainActivity extends AppCompatActivity {
 
     // Método responsável por realizar o login do usuário
     public void logar(View view){
+
+        String usuarioDigitado = edtUsuario.getText().toString();
+        String senhaDigitada = edtSenha.getText().toString();
+
         // Verifica se os campos não estão em branco.
-        if (!edtUsuario.getText().toString().isEmpty() && !edtSenha.getText().toString().isEmpty()){
-            String usuarioDigitado = edtUsuario.getText().toString();
-            String senhaDigitada = edtSenha.getText().toString();
+        if (!usuarioDigitado.isEmpty() && !senhaDigitada.isEmpty()){
 
             // Recupera as informações salvas no SharedPreferences
             SharedPreferences sharedPreferences = getSharedPreferences("dadosUsuario", MODE_PRIVATE);
@@ -37,11 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
             // Verifica se o usuário possui uma conta cadastrada.
             if (usuarioDigitado.equals(usuarioCadastrado) && senhaDigitada.equals(senhaCadastrada)){
+
                 Intent intent = new Intent(MainActivity.this, Logado.class);
                 intent.putExtra("nomeUsuario", usuarioCadastrado);
                 startActivity(intent);
+
             }else{
-                Toast.makeText(this, "Usuário não cadastrado!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Usuário e ou senha incorreto.", Toast.LENGTH_SHORT).show();
             }
         }else{
             Toast.makeText(this, "Dados faltando. Por favor, revise as informações!", Toast.LENGTH_SHORT).show();
