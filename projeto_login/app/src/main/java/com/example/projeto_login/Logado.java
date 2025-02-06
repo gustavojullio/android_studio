@@ -1,14 +1,9 @@
 package com.example.projeto_login;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class Logado extends AppCompatActivity {
     TextView txtLogado;
@@ -21,6 +16,8 @@ public class Logado extends AppCompatActivity {
         txtLogado = findViewById(R.id.txtLogado);
 
         Intent intent = getIntent();
+
+        // Recupera as informações enviadas na Intent
         String nomeUsuario = intent.getStringExtra("nomeUsuario");
 
         txtLogado.setText("Seja bem-vindo " + nomeUsuario + "!");
