@@ -9,10 +9,15 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class Cadastro extends AppCompatActivity {
 
     EditText edtUsuario;
     EditText edtSenha;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,9 @@ public class Cadastro extends AppCompatActivity {
 
         edtUsuario = findViewById(R.id.edtUsuario);
         edtSenha = findViewById(R.id.edtSenha);
+
+        auth = FirebaseAuth.getInstance();
+
 
     }
     // Método responsável por criar o cadastro do usuário
@@ -36,20 +44,27 @@ public class Cadastro extends AppCompatActivity {
                 String nomeUsuario = edtUsuario.getText().toString();
                 String senhaUsuario = edtSenha.getText().toString();
 
-                // Salva as informações no SharedPreferences
-                SharedPreferences sharedPreferences = getSharedPreferences("dadosUsuario", MODE_PRIVATE);
-                SharedPreferences.Editor editor =  sharedPreferences.edit();
+                auth.createUserWithEmailAndPassword(nomeUsuario, senhaUsuario).addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()){
+                        FirebaseUser user = auth.getCurrentUser();
+                        if (user != null){
+                            user.sendEmailVerification().addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()){
+                                    Toast.makeText(this, "Cadastro realizado. E-mail de confirmação enviado.", Toast.LENGTH_SHORT).show();
 
-                editor.putString("nomeUsuario", nomeUsuario);
-                editor.putString("senhaUsuario", senhaUsuario);
-                editor.apply();
-
-                Toast.makeText(this, "Usuario Cadastrado Com Sucesso.", Toast.LENGTH_SHORT).show();
-
-                // Retorna a view de login
-                Intent intent = new Intent(Cadastro.this, MainActivity.class);
-                startActivity(intent);
-
+                                    // Redirecionar para a tela de login
+                                    Intent intent = new Intent(Cadastro.this, MainActivity.class);
+                                    startActivity(intent);
+                                }else{
+                                    Toast.makeText(this, "Falha ao enviar e-mail de confirmação.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }else{
+                        // Caso o cadastro falhe, exibe a mensagem de erro
+                        Toast.makeText(this, "Erro no cadastro: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }else{
                 Toast.makeText(this, "Senha do Usuário Obrigatória!", Toast.LENGTH_SHORT).show();
             }
