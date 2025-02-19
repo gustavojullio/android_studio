@@ -26,8 +26,6 @@ public class Cadastro extends AppCompatActivity {
         edtSenha = findViewById(R.id.edtSenha);
 
         auth = FirebaseAuth.getInstance();
-
-
     }
     // Método responsável por criar o cadastro do usuário
     public void cadastrar(View view){
@@ -39,28 +37,31 @@ public class Cadastro extends AppCompatActivity {
 
                 String nomeUsuario = edtUsuario.getText().toString();
                 String senhaUsuario = edtSenha.getText().toString();
+                if(senhaUsuario.length() >= 6) {
+                    auth.createUserWithEmailAndPassword(nomeUsuario, senhaUsuario).addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = auth.getCurrentUser();
+                            if (user != null) {
+                                user.sendEmailVerification().addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        Toast.makeText(this, "Cadastro realizado. E-mail de confirmação enviado.", Toast.LENGTH_SHORT).show();
 
-                auth.createUserWithEmailAndPassword(nomeUsuario, senhaUsuario).addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()){
-                        FirebaseUser user = auth.getCurrentUser();
-                        if (user != null){
-                            user.sendEmailVerification().addOnCompleteListener(task1 -> {
-                                if (task1.isSuccessful()){
-                                    Toast.makeText(this, "Cadastro realizado. E-mail de confirmação enviado.", Toast.LENGTH_SHORT).show();
-
-                                    // Redirecionar para a tela de login
-                                    Intent intent = new Intent(Cadastro.this, MainActivity.class);
-                                    startActivity(intent);
-                                }else{
-                                    Toast.makeText(this, "Falha ao enviar e-mail de confirmação.", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                                        // Redirecionar para a tela de login
+                                        Intent intent = new Intent(Cadastro.this, MainActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(this, "Falha ao enviar e-mail de confirmação.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        } else {
+                            // Caso o cadastro falhe, exibe a mensagem de erro
+                            Toast.makeText(this, "Erro no cadastro: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    }else{
-                        // Caso o cadastro falhe, exibe a mensagem de erro
-                        Toast.makeText(this, "Erro no cadastro: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    });
+                }else {
+                    Toast.makeText(this, "Senha precisa ter ao menos 6 caracteres!", Toast.LENGTH_SHORT).show();
+                }
             }else{
                 Toast.makeText(this, "Senha do Usuário Obrigatória!", Toast.LENGTH_SHORT).show();
             }

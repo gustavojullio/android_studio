@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Dados faltando. Por favor, revise as informações!", Toast.LENGTH_SHORT).show();
         }
-
     }
     // Método responsável por direcionar o usuário a uma view de cadastro
     public void cadastrar(View view){
