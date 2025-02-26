@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Idade"
-            android:inputType="text"/>
+            android:inputType="number"/>
 
         <EditText
             android:id="@+id/edtTelefone"

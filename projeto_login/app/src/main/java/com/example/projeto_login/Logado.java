@@ -1,12 +1,10 @@
 package com.example.projeto_login;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,11 +36,13 @@ public class Logado extends AppCompatActivity {
 
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
+
             String userId = user.getUid();
             databaseReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
+
                         String nome = snapshot.child("nome").getValue(String.class);
                         Integer idade = snapshot.child("idade").getValue(Integer.class); // Correção
                         String telefone = snapshot.child("telefone").getValue(String.class);

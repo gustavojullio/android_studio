@@ -1,12 +1,13 @@
 package com.example.projeto_login;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -38,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
             auth.signInWithEmailAndPassword(usuarioDigitado, senhaDigitada).addOnCompleteListener(this, task -> {
                 if(task.isSuccessful()){
+
                     FirebaseUser user = auth.getCurrentUser();
                     if(user != null && user.isEmailVerified()){
+
                         Intent intent = new Intent(MainActivity.this, Logado.class);
                         intent.putExtra("nomeUsuario", usuarioDigitado);
                         startActivity(intent);
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     // Caso o login falhe
                     Toast.makeText(this, "Usuário ou senha incorretos.", Toast.LENGTH_SHORT).show();
+                    Log.v("Task Failed Login", task.getException().getMessage());
                 }
             });
         }else{
