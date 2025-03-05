@@ -37,7 +37,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/bordas_redondas"
             android:hint="E-mail"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:padding="12dp" />

@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,7 +43,7 @@ public class Cadastro extends AppCompatActivity {
         edtEndereco = findViewById(R.id.edtEndereco);
 
         auth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Usuarios");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Clientes");
     }
 
     // Método responsável por criar o cadastro do usuário
@@ -68,7 +70,7 @@ public class Cadastro extends AppCompatActivity {
                     if (senhaUsuario.length() >= 6) {
 
                         Integer idade2 = Integer.parseInt(idade);
-                        auth.createUserWithEmailAndPassword(nomeUsuario, senhaUsuario).addOnCompleteListener(Cadastro.this, task -> {
+                        auth.createUserWithEmailAndPassword(email, senhaUsuario).addOnCompleteListener(Cadastro.this, task -> {
                             if (task.isSuccessful()) {
 
                                 FirebaseUser user = auth.getCurrentUser();
@@ -78,14 +80,30 @@ public class Cadastro extends AppCompatActivity {
                                         if (task1.isSuccessful()) {
 
                                             String userId = user.getUid();
-                                            Usuario novoUsuario = new Usuario(nome, idade2, telefone, endereco, nomeUsuario);
+                                            Usuario novoUsuario = new Usuario(nome, idade2, telefone, endereco, email);
                                             databaseReference.child(userId).setValue(novoUsuario);
+//
+//                                            Toast.makeText(this, "Por favor, verifique seu E-mail para finalizar o cadastro.", Toast.LENGTH_SHORT).show();
+//
+//                                            // Redirecionar para a tela de login
+//                                            Intent intent = new Intent(Cadastro.this, MainActivity.class);
+//                                            startActivity(intent);
+                                            // Criação do AlertDialog
 
-                                            Toast.makeText(this, "Por favor, verifique seu E-mail para finalizar o cadastro.", Toast.LENGTH_SHORT).show();
-
-                                            // Redirecionar para a tela de login
-                                            Intent intent = new Intent(Cadastro.this, MainActivity.class);
-                                            startActivity(intent);
+                                            new AlertDialog.Builder(Cadastro.this)
+                                                    .setTitle("E-mail enviado")
+                                                    .setMessage("Por favor, verifique seu E-mail para finalizar o cadastro.")
+                                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            // Redirecionar para a tela de login
+                                                            Intent intent = new Intent(Cadastro.this, MainActivity.class);
+                                                            startActivity(intent);
+                                                            finish(); // Finaliza a atividade atual
+                                                        }
+                                                    })
+                                                    .setCancelable(false) // Impede que o usuário feche o alerta sem clicar em "OK"
+                                                    .show();
                                         } else {
                                             Toast.makeText(this, "Falha ao enviar e-mail de confirmação.", Toast.LENGTH_SHORT).show();
                                         }
