@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/botao_login"
-            android:text="Agendar"
+            android:text="Continuar"
             android:textColor="#232323"
             android:textSize="18sp"
             android:padding="16dp"

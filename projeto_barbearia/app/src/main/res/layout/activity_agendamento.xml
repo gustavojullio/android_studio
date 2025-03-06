@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232323"
+    tools:context=".Agendamento">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtAgendamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:text="Agendamento"
+            android:textAlignment="center"
+            android:textColor="#ffb400"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txtData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data do agendamento"
+            android:textAlignment="center"
+            android:textColor="#ffb400"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="#4d3625"
+            android:focusedMonthDateColor="#ffb400"
+            android:unfocusedMonthDateColor="#ffffff"
+            android:showWeekNumber="false"/>
+
+        <TextView
+            android:id="@+id/txtHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hora do agendamento"
+            android:textAlignment="center"
+            android:textColor="#ffb400"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp" />
+
+        <android.widget.TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner"
+            android:layout_margin="16dp"
+            android:background="#4d3625"
+            android:textColor="#ffb400"
+            />
+
+        <TextView
+            android:id="@+id/txtProfissional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecione o profissional"
+            android:textAlignment="center"
+            android:textColor="#ffb400"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupProfissional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="16dp">
+
+            <RadioButton
+                android:id="@+id/radioDaniel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Daniel"
+                android:textColor="#ffb400"
+                android:background="#4d3625"
+                android:padding="16dp"
+                android:layout_marginBottom="15dp"/>
+
+            <RadioButton
+                android:id="@+id/radioPedro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pedro"
+                android:textColor="#ffb400"
+                android:background="#4d3625"
+                android:padding="16dp"
+                android:layout_marginBottom="15dp"/>
+
+            <RadioButton
+                android:id="@+id/radioAndre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Andre"
+                android:textColor="#ffb400"
+                android:background="#4d3625"
+                android:padding="16dp"/>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/botao_login"
+                android:text="Agendar"
+                android:textColor="#232323"
+                android:textSize="18sp"
+                android:padding="16dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="100dp"
+                android:onClick="agendar"/>
+
+        </RadioGroup>
+    </LinearLayout>
+</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

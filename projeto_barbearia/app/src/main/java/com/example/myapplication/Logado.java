@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -53,7 +54,12 @@ public class Logado extends AppCompatActivity {
             } else {
                 // Serviço selecionado, exibe a ação a ser realizada
                 String nomeServico = servicoModels.get(selectedPosition).getNomeServico();
-                Toast.makeText(this, "Serviço " + nomeServico + " selecionado. Agora agende seu horário!", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(Logado.this, Agendamento.class);
+                intent.putExtra("nomeServico", nomeServico);
+
+                // Inicia a próxima Activity
+                startActivity(intent);
             }
         });
     }
