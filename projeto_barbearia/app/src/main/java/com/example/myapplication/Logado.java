@@ -2,17 +2,15 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
 public class Logado extends AppCompatActivity {
 
+    // Declaração do RecyclerView e do ArrayList para armazenar os modelos de serviços
     RecyclerView recyclerView;
     ArrayList<ServicoModel> servicoModels = new ArrayList<>();
     ServicoAdapter adapter;
@@ -25,7 +23,7 @@ public class Logado extends AppCompatActivity {
         // Inicialização do RecyclerView
         recyclerView = findViewById(R.id.recyclerview);
 
-        // Criando os modelos de serviços
+        // Criação dos objetos com os modelos de serviços
         ServicoModel servico1 = new ServicoModel("Corte de Cabelo", R.drawable.tesoura);
         ServicoModel servico2 = new ServicoModel("Corte de Barba", R.drawable.barba);
         ServicoModel servico3 = new ServicoModel("Lavagem de Cabelo", R.drawable.lavagem);

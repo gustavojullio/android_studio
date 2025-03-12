@@ -2,16 +2,15 @@ package com.example.myapplication;
 
 public class AgendamentoModel {
     private String nomeServico;
-    private long data;
+    private String data;
     private int hora;
     private int minuto;
     private String profissional;
 
-    public AgendamentoModel() {
-        // Construtor vazio necessário para o Firebase
-    }
+    // Construtor vazio necessário para o Firebase
+    public AgendamentoModel() {}
 
-    public AgendamentoModel(String nomeServico, long data, int hora, int minuto, String profissional) {
+    public AgendamentoModel(String nomeServico, String data, int hora, int minuto, String profissional) {
         this.nomeServico = nomeServico;
         this.data = data;
         this.hora = hora;
@@ -28,11 +27,11 @@ public class AgendamentoModel {
         this.nomeServico = nomeServico;
     }
 
-    public long getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(long data) {
+    public void setData(String data) {
         this.data = data;
     }
 

@@ -1,6 +1,9 @@
 package com.example.myapplication;
 
+// Classe que representa um usuário
 public class Usuario {
+
+    // Declaração das variáveis
     private String nome;
     private int idade;
     private String telefone;

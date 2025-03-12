@@ -6,26 +6,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
 public class ServicoAdapter extends RecyclerView.Adapter<ServicoAdapter.ViewHolder> {
+    // Lista de serviços que será exibida no RecyclerView
     ArrayList<ServicoModel> servicoModels;
-    private int selectedPosition = -1; // Nenhum item selecionado inicialmente
 
+    // Nenhum item selecionado inicialmente
+    private int selectedPosition = -1;
+
+    // Construtor da classe que recebe a lista de serviços
     public ServicoAdapter(ArrayList<ServicoModel> servicoModels) {
         this.servicoModels = servicoModels;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
         TextView txtNomeServico;
         ImageView imgServico;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            // Inicialização dos elementos da view
             txtNomeServico = itemView.findViewById(R.id.txtNomeServico);
             imgServico = itemView.findViewById(R.id.imgServico);
         }
@@ -40,6 +45,7 @@ public class ServicoAdapter extends RecyclerView.Adapter<ServicoAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+       // Recuperando o serviço atual
         ServicoModel servicoModel = servicoModels.get(position);
         holder.imgServico.setImageResource(servicoModel.getImgServicoResource());
         holder.txtNomeServico.setText(servicoModel.getNomeServico());
@@ -53,11 +59,12 @@ public class ServicoAdapter extends RecyclerView.Adapter<ServicoAdapter.ViewHold
 
         // Adicionando o clique para selecionar o item
         holder.itemView.setOnClickListener(v -> {
-            selectedPosition = position; // Marca o item como selecionado
-            notifyDataSetChanged(); // Atualiza a visualização do RecyclerView
+            selectedPosition = position;
+            notifyDataSetChanged();
         });
     }
 
+    // Retorna o número de itens na lista
     @Override
     public int getItemCount() {
         return servicoModels.size();

@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,24 +11,22 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Agendamento extends AppCompatActivity {
+
+    // Declaração das variáveis e banco de dados
     TextView txtAgendamento;
     RadioGroup radioGroupProfissional;
     CalendarView calendarView;
     TimePicker timePicker;
     FirebaseAuth auth;
     DatabaseReference databaseReference;
+    String profissional = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +46,26 @@ public class Agendamento extends AppCompatActivity {
 
         // Listener para a seleção de data no CalendarView
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            // Formata e exibe a data selecionada
             String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
             Toast.makeText(Agendamento.this, "Data selecionada: " + selectedDate, Toast.LENGTH_SHORT).show();
         });
 
-        // Configura o TimePicker para permitir apenas horários entre 08:00 e 18:00
-        timePicker.setHour(8);
-        timePicker.setMinute(0);
         timePicker.setOnTimeChangedListener((view, hourOfDay, minute) -> {
+            // Verifica se a hora é menor que 8 ou maior que 18
             if (hourOfDay < 8) {
+                // Define a hora mínima como 08:00
                 timePicker.setHour(8);
+                // Define os minutos como 00
+                timePicker.setMinute(0);
             } else if (hourOfDay > 18) {
+                // Define a hora máxima como 18:00
                 timePicker.setHour(18);
+                // Define os minutos como 00
+                timePicker.setMinute(0);
+            } else if (hourOfDay == 18 && minute > 0) {
+                // Se a hora for 18 e os minutos forem maiores que 0, define os minutos como 00
+                timePicker.setMinute(0);
             }
         });
 
@@ -65,19 +73,20 @@ public class Agendamento extends AppCompatActivity {
         radioGroupProfissional.setOnCheckedChangeListener((group, checkedId) -> {
             String selecionado = "";
             if (checkedId == R.id.radioDaniel) {
-                selecionado = "Daniel";
+                selecionado = "Daniel Carvalho";
             } else if (checkedId == R.id.radioPedro) {
-                selecionado = "Pedro";
+                selecionado = "Pedro Silva";
             } else if (checkedId == R.id.radioAndre) {
-                selecionado = "Andre";
+                selecionado = "André Rodrigues";
             }
-            Toast.makeText(Agendamento.this, "Profissional selecionado: " + selecionado, Toast.LENGTH_SHORT).show();
         });
     }
 
     // Método para agendar o serviço
     public void agendar(View view) {
+        // Verifica se algum profissional foi selecionado
         int marcado = radioGroupProfissional.getCheckedRadioButtonId();
+
         if (marcado == -1) {
             Toast.makeText(this, "Selecione um profissional antes de prosseguir!", Toast.LENGTH_SHORT).show();
         } else {
@@ -87,14 +96,17 @@ public class Agendamento extends AppCompatActivity {
             int horaSelecionada = timePicker.getHour(); // Hora selecionada
             int minutoSelecionado = timePicker.getMinute(); // Minuto selecionado
 
-            // Recupera o profissional selecionado
-            String profissional = "";
+            // Formatar a data para o formato dd/MM/yy
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yy");
+            String dataFormatada = sdf.format(new java.util.Date(dataSelecionada));
+
+            // Verifica e atribui o nome do profissional com base na seleção
             if (marcado == R.id.radioDaniel) {
-                profissional = "Daniel";
+                profissional = "Daniel Carvalho";
             } else if (marcado == R.id.radioPedro) {
-                profissional = "Pedro";
+                profissional = "Pedro Silva";
             } else if (marcado == R.id.radioAndre) {
-                profissional = "Andre";
+                profissional = "André Rodrigues";
             }
 
             // Verifica se o usuário está autenticado
@@ -107,15 +119,13 @@ public class Agendamento extends AppCompatActivity {
             String userId = auth.getCurrentUser().getUid();
 
             // Cria um objeto AgendamentoModel com os dados
-            AgendamentoModel agendamento = new AgendamentoModel(nomeServico, dataSelecionada, horaSelecionada, minutoSelecionado, profissional);
+            AgendamentoModel agendamento = new AgendamentoModel(nomeServico, dataFormatada, horaSelecionada, minutoSelecionado, profissional);
 
             // Salva o agendamento no Firebase
             databaseReference.child(userId).child("agendamentos").push().setValue(agendamento)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(Agendamento.this, "Agendamento realizado com sucesso!", Toast.LENGTH_SHORT).show();
-                            // Redireciona para a tela principal (opcional)
-                            // startActivity(new Intent(Agendamento.this, MainActivity.class));
+                            showAgendamentoDialog(nomeServico, profissional, dataSelecionada, horaSelecionada, minutoSelecionado);
                         } else {
                             Toast.makeText(Agendamento.this, "Erro ao realizar agendamento.", Toast.LENGTH_SHORT).show();
                             if (task.getException() != null) {
@@ -124,5 +134,31 @@ public class Agendamento extends AppCompatActivity {
                         }
                     });
         }
+    }
+    private void showAgendamentoDialog(String nomeServico, String profissional, long data, int hora, int minuto) {
+        // Formata a data para exibir no formato dia, mes e ano
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = sdf.format(new java.util.Date(data));
+
+        // Formata a hora para exibir no formato 24h
+        String horaFormatada = String.format("%02d:%02d", hora, minuto);
+
+        // Exibe o AlertDialog com o resumo do agendamento
+        new AlertDialog.Builder(this)
+                .setTitle("Agendamento realizado com sucesso!")
+                .setMessage("Resumo do Agendamento:\n\n" +
+                        "Profissional: " + profissional + "\n" +
+                        "Serviço: " + nomeServico + "\n" +
+                        "Data: " + dataFormatada + "\n" +
+                        "Horário: " + horaFormatada)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Agendamento.this, MainActivity.class));
+                        finish();
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 }

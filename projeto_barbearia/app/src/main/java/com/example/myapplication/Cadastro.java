@@ -7,19 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Cadastro extends AppCompatActivity {
+    // Declaração das variáveis para as entradas
     EditText edtEmail;
     EditText edtSenha;
     EditText edtNome;
@@ -35,6 +31,7 @@ public class Cadastro extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         setContentView(R.layout.activity_cadastro);
+        // Inicialização das variáveis
         edtEmail = findViewById(R.id.edtEmail);
         edtSenha = findViewById(R.id.edtSenha);
         edtNome = findViewById(R.id.edtNome);
@@ -42,6 +39,7 @@ public class Cadastro extends AppCompatActivity {
         edtTelefone = findViewById(R.id.edtTelefone);
         edtEndereco = findViewById(R.id.edtEndereco);
 
+        // Inicialização do Firebase
         auth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Clientes");
     }
@@ -49,9 +47,9 @@ public class Cadastro extends AppCompatActivity {
     // Método responsável por criar o cadastro do usuário
     public void cadastrar(View view) {
 
+        // Recuperação das informações digitadas
         String email = edtEmail.getText().toString();
         String senhaUsuario = edtSenha.getText().toString();
-
         String nome = edtNome.getText().toString();
         String idade = edtIdade.getText().toString();
         String telefone = edtTelefone.getText().toString();
@@ -59,7 +57,6 @@ public class Cadastro extends AppCompatActivity {
 
 
         // Verifica se as informações foram digitadas para realizar o cadastro
-
         if (!email.isEmpty()) {
 
             if (!senhaUsuario.isEmpty()) {
@@ -78,18 +75,15 @@ public class Cadastro extends AppCompatActivity {
 
                                     user.sendEmailVerification().addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-
+                                            // Recupera o ID do usuário
                                             String userId = user.getUid();
+                                            // Cria um objeto Usuario com os dados
                                             Usuario novoUsuario = new Usuario(nome, idade2, telefone, endereco, email);
-                                            databaseReference.child(userId).setValue(novoUsuario);
-//
-//                                            Toast.makeText(this, "Por favor, verifique seu E-mail para finalizar o cadastro.", Toast.LENGTH_SHORT).show();
-//
-//                                            // Redirecionar para a tela de login
-//                                            Intent intent = new Intent(Cadastro.this, MainActivity.class);
-//                                            startActivity(intent);
-                                            // Criação do AlertDialog
 
+                                            // Salva o usuário no Firebase
+                                            databaseReference.child(userId).setValue(novoUsuario);
+
+                                            // Exibe uma mensagem informando que o e-mail de verificação foi enviado
                                             new AlertDialog.Builder(Cadastro.this)
                                                     .setTitle("E-mail enviado")
                                                     .setMessage("Por favor, verifique seu E-mail para finalizar o cadastro.")
@@ -99,10 +93,10 @@ public class Cadastro extends AppCompatActivity {
                                                             // Redirecionar para a tela de login
                                                             Intent intent = new Intent(Cadastro.this, MainActivity.class);
                                                             startActivity(intent);
-                                                            finish(); // Finaliza a atividade atual
+                                                            finish();
                                                         }
                                                     })
-                                                    .setCancelable(false) // Impede que o usuário feche o alerta sem clicar em "OK"
+                                                    .setCancelable(false)
                                                     .show();
                                         } else {
                                             Toast.makeText(this, "Falha ao enviar e-mail de confirmação.", Toast.LENGTH_SHORT).show();

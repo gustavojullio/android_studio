@@ -8,35 +8,35 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 public class MainActivity extends AppCompatActivity {
+    // Declaração das variáveis
     EditText edtEmail, edtSenha;
     FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-
+        // Inicialização das variáveis
         edtEmail = findViewById(R.id.edtEmail);
         edtSenha = findViewById(R.id.edtSenha);
 
+        // Inicialização do Firebase
         auth = FirebaseAuth.getInstance();
 
     }
     // Método responsável por realizar o login do usuário
     public void logar(View view){
 
+        // Recuperação das informações digitadas
         String emailDigitado = edtEmail.getText().toString();
         String senhaDigitada = edtSenha.getText().toString();
 
@@ -47,14 +47,15 @@ public class MainActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
 
                     FirebaseUser user = auth.getCurrentUser();
+
+                    // Verifica se o e-mail foi verificado
                     if(user != null && user.isEmailVerified()){
 
                         Intent intent = new Intent(MainActivity.this, Logado.class);
                         startActivity(intent);
                     }else {
-//                        // Caso o e-mail não tenha sido verificado
-//                        Toast.makeText(this, "Por favor, verifique seu e-mail antes de logar.", Toast.LENGTH_SHORT).show();
                         // Caso o e-mail não tenha sido verificado
+                        Toast.makeText(this, "E-mail não verificado.", Toast.LENGTH_SHORT).show();
                         new AlertDialog.Builder(this)
                                 .setTitle("E-mail não verificado")
                                 .setMessage("Por favor, verifique seu e-mail antes de logar.")
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     }
                                 })
-                                .setCancelable(false) // Impede que o usuário feche o AlertDialog sem clicar em "OK"
+                                .setCancelable(false)
                                 .show();
                     }
                 }else{

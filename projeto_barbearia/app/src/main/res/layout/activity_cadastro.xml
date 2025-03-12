@@ -107,11 +107,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="@drawable/botao_login"
+            android:backgroundTint="#ffb400"
+            android:onClick="cadastrar"
+            android:padding="16dp"
             android:text="Cadastrar"
             android:textColor="#232323"
-            android:textSize="18sp"
-            android:padding="16dp"
-            android:onClick="cadastrar"/>
+            android:textSize="18sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

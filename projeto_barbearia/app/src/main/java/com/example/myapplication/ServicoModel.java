@@ -1,9 +1,9 @@
 package com.example.myapplication;
 
 public class ServicoModel {
+    // Declaração das variáveis
     String nomeServico;
     int imgServicoResource;
-
 
     // Construtor responsável pela criação de cada componente do RecyclerView.
     public ServicoModel(String nomeServico, int imgServicoResourceResource){
@@ -11,6 +11,7 @@ public class ServicoModel {
         this.imgServicoResource = imgServicoResourceResource;
     }
 
+    // Métodos Getters e Setters
     public String getNomeServico(){
         return nomeServico;
     }
