@@ -27,6 +27,7 @@ public class Agendamento extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference databaseReference;
     String profissional = "";
+    String selectedDate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class Agendamento extends AppCompatActivity {
         // Listener para a seleção de data no CalendarView
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             // Formata e exibe a data selecionada
-            String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+            selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
             Toast.makeText(Agendamento.this, "Data selecionada: " + selectedDate, Toast.LENGTH_SHORT).show();
         });
 
@@ -92,13 +93,13 @@ public class Agendamento extends AppCompatActivity {
         } else {
             // Recupera os dados do agendamento
             String nomeServico = getIntent().getStringExtra("nomeServico"); // Nome do serviço
-            long dataSelecionada = calendarView.getDate(); // Data selecionada em milissegundos
+            //long dataSelecionada = calendarView.getDate(); // Data selecionada em milissegundos
             int horaSelecionada = timePicker.getHour(); // Hora selecionada
             int minutoSelecionado = timePicker.getMinute(); // Minuto selecionado
 
-            // Formatar a data para o formato dd/MM/yy
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yy");
-            String dataFormatada = sdf.format(new java.util.Date(dataSelecionada));
+            //Formatar a data para o formato dd/MM/yy
+           //java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yy");
+          // String dataFormatada = sdf.format(new java.util.Date(dataSelecionada));
 
             // Verifica e atribui o nome do profissional com base na seleção
             if (marcado == R.id.radioDaniel) {
@@ -118,14 +119,20 @@ public class Agendamento extends AppCompatActivity {
             // Recupera o ID do usuário autenticado
             String userId = auth.getCurrentUser().getUid();
 
+            if(selectedDate.equals("")){
+                long dataSelecionada = calendarView.getDate(); // Data selecionada em milissegundos
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yy");
+                selectedDate = sdf.format(new java.util.Date(dataSelecionada));
+            }
+
             // Cria um objeto AgendamentoModel com os dados
-            AgendamentoModel agendamento = new AgendamentoModel(nomeServico, dataFormatada, horaSelecionada, minutoSelecionado, profissional);
+            AgendamentoModel agendamento = new AgendamentoModel(nomeServico, selectedDate, horaSelecionada, minutoSelecionado, profissional);
 
             // Salva o agendamento no Firebase
             databaseReference.child(userId).child("agendamentos").push().setValue(agendamento)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            showAgendamentoDialog(nomeServico, profissional, dataSelecionada, horaSelecionada, minutoSelecionado);
+                            showAgendamentoDialog(nomeServico, profissional, selectedDate, horaSelecionada, minutoSelecionado);
                         } else {
                             Toast.makeText(Agendamento.this, "Erro ao realizar agendamento.", Toast.LENGTH_SHORT).show();
                             if (task.getException() != null) {
@@ -135,10 +142,10 @@ public class Agendamento extends AppCompatActivity {
                     });
         }
     }
-    private void showAgendamentoDialog(String nomeServico, String profissional, long data, int hora, int minuto) {
+    private void showAgendamentoDialog(String nomeServico, String profissional, String data, int hora, int minuto) {
         // Formata a data para exibir no formato dia, mes e ano
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
-        String dataFormatada = sdf.format(new java.util.Date(data));
+        //String dataFormatada = sdf.format(new java.util.Date(data));
 
         // Formata a hora para exibir no formato 24h
         String horaFormatada = String.format("%02d:%02d", hora, minuto);
@@ -149,12 +156,20 @@ public class Agendamento extends AppCompatActivity {
                 .setMessage("Resumo do Agendamento:\n\n" +
                         "Profissional: " + profissional + "\n" +
                         "Serviço: " + nomeServico + "\n" +
-                        "Data: " + dataFormatada + "\n" +
+                        "Data: " + selectedDate + "\n" +
                         "Horário: " + horaFormatada)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Finalizar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startActivity(new Intent(Agendamento.this, MainActivity.class));
+                        finish();
+                    }
+                })
+                .setNeutralButton("Adicionar Novo Serviço", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Redireciona para a tela Logado para adicionar novo serviço
+                        startActivity(new Intent(Agendamento.this, Logado.class));
                         finish();
                     }
                 })
