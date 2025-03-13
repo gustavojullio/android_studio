@@ -49,7 +49,6 @@ public class Agendamento extends AppCompatActivity {
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             // Formata e exibe a data selecionada
             selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-            Toast.makeText(Agendamento.this, "Data selecionada: " + selectedDate, Toast.LENGTH_SHORT).show();
         });
 
         timePicker.setOnTimeChangedListener((view, hourOfDay, minute) -> {
@@ -96,10 +95,6 @@ public class Agendamento extends AppCompatActivity {
             //long dataSelecionada = calendarView.getDate(); // Data selecionada em milissegundos
             int horaSelecionada = timePicker.getHour(); // Hora selecionada
             int minutoSelecionado = timePicker.getMinute(); // Minuto selecionado
-
-            //Formatar a data para o formato dd/MM/yy
-           //java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yy");
-          // String dataFormatada = sdf.format(new java.util.Date(dataSelecionada));
 
             // Verifica e atribui o nome do profissional com base na seleção
             if (marcado == R.id.radioDaniel) {
