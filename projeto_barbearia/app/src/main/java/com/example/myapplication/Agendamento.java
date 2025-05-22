@@ -44,6 +44,7 @@ public class Agendamento extends AppCompatActivity {
         // Inicializa o Firebase
         auth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Clientes");
+        calendarView.setMinDate(System.currentTimeMillis());
 
         // Listener para a seleção de data no CalendarView
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
